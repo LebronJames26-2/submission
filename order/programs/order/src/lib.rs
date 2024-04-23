@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-declare_id!("ER7aWcWdAdJU1ryuy2jYQ8x2khMuEfEaVyE2wA4YcwRV");
+declare_id!("35WSnRPLrqKeZWcXmq65vfiJ4ns1CAAEtSiC91vYhApr");
 
 #[program]
 pub mod order {
@@ -16,7 +16,7 @@ pub mod order {
         quanp: String
     ) 
     -> Result<()> {
-        let purchase = &mut ctx.accounts.purchase;
+        let purchase: &mut Account<'_, purchase> = &mut ctx.accounts.purchase;
         purchase.nam = nam;
         purchase.contact = contact;
         purchase.sizeb = sizeb;
@@ -37,16 +37,16 @@ pub struct Initialize<'info> {
     #[account(
         init,
         payer = payer,
-        space = 8 + Purchase::INIT_SPACE
+        space = 8 + purchase::INIT_SPACE
     )]
 
-    pub purchase: Account<'info, Purchase>,
+    pub purchase: Account<'info, purchase>,
     pub system_program: Program<'info, System>
 }
 
 #[account]
 #[derive(InitSpace)]
-pub struct Purchase {
+pub struct purchase {
     #[max_len(100)]
     pub nam: String,
     #[max_len(100)]

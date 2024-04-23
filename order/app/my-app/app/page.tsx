@@ -1,8 +1,13 @@
 "use client";
 import { useState } from "react";
 import { AnchorProvider, Program, web3 } from "@coral-xyz/anchor";
-import { PublicKey } from "@metaplex-foundation/js";
-import Image from 'next/image'
+import black from './MMM4.jpg';
+import white from './MMM5.jpg';
+import lanyard from './MMM3.jpg';
+import pin from './MMM2.jpg';
+import Image from 'next/image';
+
+const order_IDL = require('../app/idl.json');
 
 export default function Home() {
   const [connectedWallet, setconnectedWallet] = useState<null | string>(null);
@@ -15,6 +20,7 @@ export default function Home() {
   const [quanw, setquanw] = useState<string>("");
   const [quanl, setquanl] = useState<string>("");
   const [quanp, setquanp] = useState<string>("");
+  const [search, setsearch] = useState<string>("");
   
   const getProvider = () => {
     const {
@@ -143,7 +149,7 @@ export default function Home() {
       <input type="text" style={{color:"black"}} onChange={handleChangecontact} value={contact} /> 
       
       <br></br><br></br>
-      <img src="https://drive.google.com/thumbnail?id=1Zbi643T8LOtooodmUuUOHSf51ss0kpJ9&sz=w1000" width={500}></img> 
+      <Image src={black} width="400" alt="" />
       
       <br></br>
       <p style={{fontSize:20}}> Black T-shirt Size: </p>
@@ -162,7 +168,7 @@ export default function Home() {
 
       
       <br></br>
-      <img src="https://drive.google.com/thumbnail?id=1pwaqWQBLasuMRaTE_uDanhQz0OjChVY7&sz=w1000" width={500}></img>
+      <Image src={white} width="400" alt="" />
       <br></br>
 
       <p style={{fontSize:20}}> White T-shirt Size: </p> 
@@ -180,14 +186,14 @@ export default function Home() {
       <input type="text" style={{color:"black"}} onChange={handleChangequanw} value={quanw} /> <br></br><br></br>
 
       <br></br>
-      <img src="https://drive.google.com/thumbnail?id=1DKg2MaQGWUgVPoyYB-wTvSyN6lJ2lDOh&sz=w1000" width={500}></img>
+      <Image src={lanyard} width="400" alt="" />
       <br></br>
 
       <p style={{fontSize:20}}> Reversible Lanyard Quantity: </p>
       <input type="text" style={{color:"black"}} onChange={handleChangequanl} value={quanl} /> <br></br><br></br>
 
       <br></br>
-      <img src="https://drive.google.com/thumbnail?id=1FfywK22tDsJlYFswOG0XeAAzQh0OWzgL&sz=w1000" width={500}></img>
+      <Image src={pin} width="400" alt="" />
       <br></br>
       <p style={{fontSize:20}}> Enamel Pin Quantity: </p>
       <input type="text" style={{color:"black"}} onChange={handleChangequanp} value={quanp} /> <br></br><br></br>
@@ -223,7 +229,7 @@ export default function Home() {
 }
 
 export type order = {
-  "address": "ER7aWcWdAdJU1ryuy2jYQ8x2khMuEfEaVyE2wA4YcwRV",
+  "address": "35WSnRPLrqKeZWcXmq65vfiJ4ns1CAAEtSiC91vYhApr",
   "metadata": {
     "name": "order",
     "version": "0.1.0",
@@ -297,22 +303,22 @@ export type order = {
   ],
   "accounts": [
     {
-      "name": "Purchase",
+      "name": "purchase",
       "discriminator": [
-        33,
-        203,
-        1,
-        252,
-        231,
-        228,
-        8,
-        67
+        55,
+        82,
+        172,
+        133,
+        27,
+        115,
+        112,
+        27
       ]
     }
   ],
   "types": [
     {
-      "name": "Purchase",
+      "name": "purchase",
       "type": {
         "kind": "struct",
         "fields": [
@@ -353,135 +359,3 @@ export type order = {
     }
   ]
 };
-
-export const order_IDL: order = {
-  "address": "ER7aWcWdAdJU1ryuy2jYQ8x2khMuEfEaVyE2wA4YcwRV",
-  "metadata": {
-    "name": "order",
-    "version": "0.1.0",
-    "spec": "0.1.0",
-    "description": "Created with Anchor"
-  },
-  "instructions": [
-    {
-      "name": "initialize",
-      "discriminator": [
-        175,
-        175,
-        109,
-        31,
-        13,
-        152,
-        155,
-        237
-      ],
-      "accounts": [
-        {
-          "name": "payer",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "purchase",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
-        }
-      ],
-      "args": [
-        {
-          "name": "nam",
-          "type": "string"
-        },
-        {
-          "name": "contact",
-          "type": "string"
-        },
-        {
-          "name": "sizeb",
-          "type": "string"
-        },
-        {
-          "name": "quanb",
-          "type": "string"
-        },
-        {
-          "name": "sizew",
-          "type": "string"
-        },
-        {
-          "name": "quanw",
-          "type": "string"
-        },
-        {
-          "name": "quanl",
-          "type": "string"
-        },
-        {
-          "name": "quanp",
-          "type": "string"
-        }
-      ]
-    }
-  ],
-  "accounts": [
-    {
-      "name": "Purchase",
-      "discriminator": [
-        33,
-        203,
-        1,
-        252,
-        231,
-        228,
-        8,
-        67
-      ]
-    }
-  ],
-  "types": [
-    {
-      "name": "Purchase",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "nam",
-            "type": "string"
-          },
-          {
-            "name": "contact",
-            "type": "string"
-          },
-          {
-            "name": "sizeb",
-            "type": "string"
-          },
-          {
-            "name": "quanb",
-            "type": "string"
-          },
-          {
-            "name": "sizew",
-            "type": "string"
-          },
-          {
-            "name": "quanw",
-            "type": "string"
-          },
-          {
-            "name": "quanl",
-            "type": "string"
-          },
-          {
-            "name": "quanp",
-            "type": "string"
-          }
-        ]
-      }
-    }
-  ]
-}
